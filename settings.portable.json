@@ -1,18 +1,7 @@
 {
   "model": "fable",
   "enabledPlugins": {
-    "swift-lsp@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "cloudflare@cloudflare": true,
-    "clangd-lsp@claude-plugins-official": true
-  },
-  "extraKnownMarketplaces": {
-    "cloudflare": {
-      "source": {
-        "source": "github",
-        "repo": "cloudflare/skills"
-      }
-    }
+    "superpowers@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
   "theme": "dark-daltonized",
