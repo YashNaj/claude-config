@@ -1,0 +1,52 @@
+{
+  "model": "fable",
+  "enabledPlugins": {
+    "swift-lsp@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "cloudflare@cloudflare": true,
+    "clangd-lsp@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "cloudflare": {
+      "source": {
+        "source": "github",
+        "repo": "cloudflare/skills"
+      }
+    }
+  },
+  "alwaysThinkingEnabled": true,
+  "theme": "dark-daltonized",
+  "editorMode": "vim",
+  "switchModelsOnFlag": false,
+  "autoMode": {
+    "soft_deny": [
+      "$defaults"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/typecheck-on-edit.sh\"",
+            "async": true,
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/green-gate.sh\"",
+            "timeout": 600
+          }
+        ]
+      }
+    ]
+  }
+}
