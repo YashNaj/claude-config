@@ -19,7 +19,7 @@
 - Match the file's existing comment density; if it has none, add none. A better name beats a comment.
 
 ## Exercise mode
-When I say "exercise mode": skip brainstorming unless an answer would change what gets built; write a lean plan; execute natively in this session, no subagent-driven development; one `/code-review` pass at the end that also flags narration comments; the hooks run the tests and typecheck, trust their output.
+On by default inside a Codespace (a SessionStart hook says so); elsewhere when I say "exercise mode": skip brainstorming unless an answer would change what gets built; write a lean plan; execute natively in this session, no subagent-driven development; one `/code-review` pass at the end that also flags narration comments; the hooks run the tests and typecheck, trust their output.
 
 ## Tooling
 - Cloudflare: use the `cf` CLI unless the project has a Wrangler configuration file.

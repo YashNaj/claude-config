@@ -40,13 +40,12 @@ else
   tmp="$(mktemp)"
   # Replace our hook groups (identified by script path) rather than appending duplicates.
   jq -s '
-    def ours: ["typecheck-on-edit.sh", "green-gate.sh"];
-    def strip_ours(groups): [groups[]? | select((.hooks // []) | all(.command | test(ours | join("|")) | not))];
+    def ours: "typecheck-on-edit\\.sh|green-gate\\.sh|exercise-mode\\.sh";
+    def strip_ours(groups): [groups[]? | select((.hooks // []) | all(.command | test(ours) | not))];
     .[0] as $cur | .[1] as $frag
     | $cur
     | .hooks = (($cur.hooks // {}) | with_entries(.value = strip_ours(.value)))
-    | .hooks.PostToolUse = ((.hooks.PostToolUse // []) + $frag.hooks.PostToolUse)
-    | .hooks.Stop        = ((.hooks.Stop // [])        + $frag.hooks.Stop)
+    | reduce ($frag.hooks | keys[]) as $ev (.; .hooks[$ev] = ((.hooks[$ev] // []) + $frag.hooks[$ev]))
   ' "$settings" "$HERE/settings.fragment.json" >"$tmp" && mv "$tmp" "$settings"
   log "merged hooks into $settings"
 fi
